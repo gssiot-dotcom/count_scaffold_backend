@@ -1,0 +1,44 @@
+{% extends "report_base.html" %}
+
+{% block content %}
+<!-- 1단계: 출고 -->
+<div class="section-title">2. 출고 확인 (사무실 → 현장)</div>
+{% if out_photo_urls %}
+  {% for p in out_photo_urls %}
+    <img src="{{ p }}">
+  {% endfor %}
+{% endif %}
+{% if out_sign_url %}
+  <p><strong>출고 담당자 서명 (사무실)</strong></p>
+  <img src="{{ out_sign_url }}" class="signature">
+{% endif %}
+
+<hr>
+
+<!-- 2단계: 현장 반납 전 -->
+<div class="section-title">3. 현장 반납 확인 (현장 → 사무실)</div>
+{% if site_return_photo_urls %}
+  {% for p in site_return_photo_urls %}
+    <img src="{{ p }}">
+  {% endfor %}
+{% endif %}
+{% if site_return_sign_url %}
+  <p><strong>현장 반납 담당자 서명 (현장)</strong></p>
+  <img src="{{ site_return_sign_url }}" class="signature">
+{% endif %}
+
+<hr>
+
+<!-- 3단계: 최종 입고 -->
+<div class="section-title">4. 최종 입고 확인 (검수 완료)</div>
+{% if final_in_photo_urls %}
+  {% for p in final_in_photo_urls %}
+    <img src="{{ p }}">
+  {% endfor %}
+{% endif %}
+{% if final_in_sign_url %}
+  <p><strong>최종 입고 담당자 서명 (사무실)</strong></p>
+  <img src="{{ final_in_sign_url }}" class="signature">
+{% endif %}
+
+{% endblock %}

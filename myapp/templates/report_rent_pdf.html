@@ -1,0 +1,16 @@
+{% extends "report_base.html" %}
+
+{% block content %}
+<div class="section-title">2. 출고 사진 및 서명 (사무실 → 현장)</div>
+
+{% if out_photo_urls %}
+  {% for p in out_photo_urls %}
+    <img src="{{ p }}">
+  {% endfor %}
+{% endif %}
+
+{% if out_sign_url %}
+  <p><strong>출고 담당자 서명 (사무실)</strong></p>
+  <img src="{{ out_sign_url }}" class="signature">
+{% endif %}
+{% endblock %}

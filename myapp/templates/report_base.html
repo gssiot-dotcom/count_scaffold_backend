@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>비계 ON 시스템 비계 보고서</title>
+  <style>
+    /* ... (기존 style 동일하게 유지) ... */
+    body { font-family: "Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif; font-size: 13px; color: #000; line-height: 1.6; }
+    h1 { text-align: center; border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 10px 0; margin-bottom: 20px; }
+    .info p { margin: 2px 0; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+    th, td { border: 1px solid #000; padding: 6px; text-align: center; }
+    .section-title { font-weight: 700; margin: 16px 0 8px; }
+    img { max-width: 85%; height: auto; display: block; margin: 10px auto; page-break-inside: avoid; }
+    img.signature { max-width: 200px; margin-left: 0; }
+    hr { margin: 20px 0; }
+  </style>
+</head>
+
+<body>
+
+<h1>비계 ON 시스템 비계 보고서</h1>
+
+<div class="info">
+  <p><strong>대여업체:</strong> {{ rental.provider_company.company_name }}</p>
+  <p><strong>임대업체(현장):</strong> {{ rental.requester_company.company_name }} / {{ rental.site.site_name }}</p>
+
+  <p><strong>출고일자:</strong> {{ rental.rental_date|date:"Y-m-d"|default:"-" }}</p>
+  <p><strong>반납일자:</strong> {{ rental.return_date|date:"Y-m-d"|default:"-" }}</p>
+</div>
+
+<div class="section-title">1. 자재 대여 및 반납 목록</div>
+<table>
+  <tr>
+    <th>No</th>
+    <th>품명</th>
+    <th>규격</th>
+    <th>견적 수량</th> <!-- planned_qty -->
+    <th>출고 수량</th> <!-- out_qty -->
+    <th>반납 수량</th> <!-- in_qty -->
+  </tr>
+  {% for d in details %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ d.material.material_name }}</td>
+    <td>{{ d.material.spec }}</td>
+    <td>{{ d.planned_qty }}</td>
+    <td>{{ d.out_qty|default:"-" }}</td>
+    <td>{{ d.in_qty|default:"-" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>
