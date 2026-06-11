@@ -948,7 +948,7 @@ class DetectAPIView(APIView):
 
         try:
             ai_response = requests.post(
-                "http://127.0.0.1:8001/detect",
+                "http://172.17.0.1:8001/detect",
                 files=files,
                 timeout=30
             )
